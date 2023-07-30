@@ -26,7 +26,7 @@ FORMS   += \
         episodiac.ui \
         settings.ui
 
-VERSION = 2.0.0.11
+VERSION = 2.0.0.14
 win32 {
     RC_ICONS = icon.ico
     QMAKE_TARGET_COMPANY = "GrafSauger"

@@ -2,7 +2,6 @@
 
 Rename::Rename(QObject *parent) : QObject(parent)
 {
-
 }
 
 bool Rename::chkSource(QString source)
@@ -37,6 +36,10 @@ void Rename::renameFile(QString source, QString target, QString targetPath)
 {
     bool doRename = false;
 
+    source = QDir::toNativeSeparators(source);
+    target = QDir::toNativeSeparators(target);
+    targetPath = QDir::toNativeSeparators(targetPath);
+
     if(chkSource(source))
     {
         if(chkTarget(targetPath))
@@ -46,9 +49,7 @@ void Rename::renameFile(QString source, QString target, QString targetPath)
         else
         {
             QDir t(targetPath);
-            t.mkpath(targetPath);
-
-            if(chkTarget(target))
+            if(t.mkpath(targetPath))
             {
                 doRename = true;
             }

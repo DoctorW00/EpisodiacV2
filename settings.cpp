@@ -16,7 +16,7 @@ settings::settings(QWidget *parent) : QDialog(parent), ui(new Ui::settings)
     // qRegisterMetaTypeStreamOperators<eData>("eData");
     // qRegisterMetaType<eData>("eData");
 
-    qDebug() << "apiKey_TMDB: " << Data.apiKey_TMDB;
+    // qDebug() << "apiKey_TMDB: " << Data.apiKey_TMDB;
 
     ui->setupUi(this);
 
@@ -81,7 +81,7 @@ void settings::on_push_newRegEX_clicked()
 
     if(!newRegEX.isEmpty())
     {
-        qDebug() << newRegEX;
+        // qDebug() << newRegEX;
 
 
         if(isValidRegEX(newRegEX))

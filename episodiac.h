@@ -48,6 +48,7 @@ private slots:
     void MessageBox(QString type, QString header, QString text);
     QStringList returnTVShowInfo();
     QString cleanSearch(QString suche);
+    QString returnCleanName(QString text);
     QString removeLeadingZero(QString text);
     QString removeCharactersForWindowsFileSys(QString text);
     void addSearchResults(QString id, QString cover, QString name, QString network, QString overview, QString date, QString slug);
@@ -70,11 +71,8 @@ private slots:
     void renameFiles();
     void on_checkLogs_clicked();
     void searchResultsClick(int row, int column);
-
     void on_selectAPI_currentIndexChanged(const QString &arg1);
-
     void on_actionSettings_triggered();
-
     void on_actionExit_triggered();
 
 private:

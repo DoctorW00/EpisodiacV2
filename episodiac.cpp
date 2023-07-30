@@ -325,6 +325,24 @@ QString Episodiac::removeLeadingZero(QString text)
     return text;
 }
 
+QString Episodiac::returnCleanName(QString text)
+{
+    QStringList badChars = { "<", ">", ":", "\"", "/", "\\", "|", "?", "*" };
+
+    if(!text.isEmpty())
+    {
+        for(auto i : badChars)
+        {
+            if(text.contains(i))
+            {
+                text.replace(i, "");
+            }
+        }
+    }
+
+    return text;
+}
+
 /**
  * @brief Episodiac::removeCharactersForWindowsFileSys
  * @param text
@@ -338,6 +356,7 @@ QString Episodiac::removeCharactersForWindowsFileSys(QString text)
     {
         text.replace(c, ""); // remove character from string
     }
+
     return text;
 }
 
@@ -679,7 +698,8 @@ void Episodiac::getFilesListFromRoot(QString path, bool subdirectories = false)
             QRegularExpressionMatch match = de.match(sub.fileName());
             if(!match.hasMatch())
             {
-                addFileList(sub.fileInfo().absoluteFilePath(), sub.fileName());
+                // addFileList(sub.fileInfo().absoluteFilePath(), sub.fileName());
+                addFileList(sub.fileInfo().path(), sub.fileName());
                 addLogText(tr("Recursive paths file: ") + sub.fileInfo().absoluteFilePath());
 
                 cnt++;
@@ -934,7 +954,7 @@ void Episodiac::renameFiles()
         return;
     }
 
-    QString showName = showInfo.at(3);
+    QString showName = returnCleanName(showInfo.at(3));
     QString showYear = showInfo.at(4);
 
     disableAllButtons();
@@ -946,7 +966,7 @@ void Episodiac::renameFiles()
         QString season = ui->fileList->item(i, 2)->text();
         QString path = ui->fileList->item(i, 0)->text();
         QString file = ui->fileList->item(i, 1)->text();
-        QString preview = ui->fileList->item(i, 4)->text();
+        QString preview = returnCleanName(ui->fileList->item(i, 4)->text());
 
         if(!path.endsWith("/"))
         {
